@@ -1,23 +1,12 @@
-import { useState } from 'react'
+import { Toaster } from 'react-hot-toast';
 import './App.css'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import Header from './Components/Header'
-import HeroSec from './Components/Herosec'
-import GymDetails from './Components/GymDetails'
-import GymDetailsSec2 from './Components/GymDetailsSec2'
-import PaymentForm from './Components/PaymentForm'
-import Footer from './Components/Footer'
+import GymPage from './Component/Gympage';
 
 function App() {
-
   return (
     <>
-      <Header />
-      <HeroSec />
-      <GymDetails />
-      <GymDetailsSec2 />
-      <PaymentForm />
-      <Footer />
+      <Toaster position="top-center" reverseOrder={false} />
+      <GymPage />
     </>
   )
 }
