@@ -25,7 +25,7 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
 
     useEffect(() => {
         const hostname = window.location.hostname;
-        const isProduction = hostname.includes("https://gym-qr-code-project.vercel.app/") && 
+        const isProduction = hostname.includes("gym-qr-code-project.vercel.app") && 
                            !hostname.includes("test.fggroup.in") && 
                            !hostname.includes("dev");
 
