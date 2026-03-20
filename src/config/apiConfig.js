@@ -5,7 +5,7 @@ let fwgBaseUrl = "http://localhost:80";
 let razorpayMerchantId = "rzp_test_F0TUZmabOwKkhe";
 let environment = "development";
 
-if (hostname === "fggroup.in" || hostname === "www.fggroup.in") {
+if (hostname === "https://gym-qr-code-project.vercel.app/" || hostname === "https://gym-qr-code-project.vercel.app/") {
   baseUrl = "https://api.fggroup.in";
   fwgBaseUrl = 'https://app-api.fggroup.in';
   environment = 'production'
@@ -14,8 +14,8 @@ if (hostname === "fggroup.in" || hostname === "www.fggroup.in") {
   baseUrl = "https://dev-api.fggroup.in";
   fwgBaseUrl = 'https://fg-app-dev-api.fggroup.in';
 } else {
-  // baseUrl = "https://dev-api.fggroup.in";
-  baseUrl = 'http://localhost:80';
+  baseUrl = "https://dev-api.fggroup.in";
+  // baseUrl = 'http://localhost:80';
   fwgBaseUrl = 'https://fg-app-dev-api.fggroup.in';
   // fwgBaseUrl = 'http://localhost:82';
 }
