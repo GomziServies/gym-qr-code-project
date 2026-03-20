@@ -23,6 +23,7 @@ export default function GymPage() {
         last_name: "",
         mobile: "",
         email: "",
+        branch: "", // Added branch field
         address_line_1: "",
         address_line_2: "",
         city: "",
@@ -96,6 +97,7 @@ export default function GymPage() {
                 last_name: profileData.last_name || "",
                 mobile: profileData.mobile || "",
                 email: profileData.email || "",
+                branch: profileData.branch || "", // Set branch from profileData
                 address_line_1: street,
                 address_line_2: isAddrObj ? (addr.address_line_2 || "") : "",
                 city: currentCity,
@@ -283,6 +285,7 @@ export default function GymPage() {
                     last_name: form.last_name,
                     mobile: form.mobile,
                     email: form.email,
+                    branch: form.branch, // Added branch to API call
                     address_line_1: form.address_line_1,
                     address_line_2: form.address_line_2,
                     city: form.city,
@@ -420,6 +423,17 @@ export default function GymPage() {
 
             if (matchedPlan) {
                 console.log("[GymPage] Proceeding with plan ID:", matchedPlan._id);
+
+                // Update selectedPlan with the correct ID for payment processing
+                const updatedPlan = {
+                    ...plan,
+                    details: {
+                        ...plan.details,
+                        itemId: matchedPlan._id
+                    }
+                };
+                setSelectedPlan(updatedPlan);
+
                 const cartResponse = await axiosInstance.post('/order-cart/add-item', {
                     item_id: matchedPlan._id,
                     item_type: item_type,
@@ -428,6 +442,7 @@ export default function GymPage() {
                 console.log("[GymPage] Add to cart success:", cartResponse.data);
             } else {
                 console.warn("[GymPage] Could not find a matching plan in the database for:", plan);
+                // For made-up plans that don't exist in DB, payment will likely fail with 400
             }
         } catch (error) {
             console.error("[GymPage] Error adding to cart:", error);
@@ -574,6 +589,7 @@ export default function GymPage() {
                                                 last_name: "",
                                                 mobile: "",
                                                 email: "",
+                                                branch: "", // Reset branch on logout
                                                 address_line_1: "",
                                                 address_line_2: "",
                                                 city: "",
@@ -650,6 +666,24 @@ export default function GymPage() {
                                             onChange={ handleChange } onClick={ handleFieldClick }
                                             readOnly={ !isLoggedIn } placeholder="Enter your email address"
                                             className={ fieldClass(isLoggedIn) } />
+                                    </div>
+
+                                    {/* Branch Selection */ }
+                                    <div>
+                                        <label className="block text-sm font-medium text-slate-700 mb-1.5">Branch</label>
+                                        <select
+                                            name="branch"
+                                            value={ form.branch }
+                                            onChange={ handleChange }
+                                            onClick={ handleFieldClick }
+                                            disabled={ !isLoggedIn }
+                                            className={ fieldClass(isLoggedIn) }
+                                        >
+                                            <option value="">Select Branch</option>
+                                            <option value="Vesu">Vesu</option>
+                                            <option value="Katargam">Katargam</option>
+                                            <option value="Adjan-Branch">Adjan-Branch</option>
+                                        </select>
                                     </div>
 
                                     {/* ADDRESS SECTION */ }
@@ -774,6 +808,9 @@ export default function GymPage() {
                         image={ capturedImage }
                         onBack={ () => setView("form") }
                         onCancel={ () => setView("form") }
+                        onEdit={ (newData) => {
+                            setProfileData(prev => ({ ...prev, ...newData }));
+                        } }
                     />
                 ) }
             </div>

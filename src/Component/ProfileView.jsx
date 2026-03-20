@@ -216,6 +216,25 @@ const fields = [
     },
     full: false,
   },
+  {
+    id: "branch",
+    label: "Branch",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        width="15"
+        height="15"
+      >
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+        <circle cx="12" cy="10" r="3" />
+      </svg>
+    ),
+    getValue: (data) => data.branch || "Not Provided",
+    full: false,
+  },
 ];
 
 export default function ProfileView({
@@ -252,6 +271,7 @@ export default function ProfileView({
       (typeof data.address === "string" ? data.address : ""),
     address_line_2: data.address?.address_line_2 || "",
     pin_code: data.address?.pin_code || "",
+    branch: data.branch || "",
   });
 
   const fetchUserData = async () => {
@@ -280,6 +300,7 @@ export default function ProfileView({
           email: u.email || "",
           address: u.address || {},
           profile_image: u.profile_image,
+          branch: u.branch || "",
         };
         setProfile(mappedData);
         setForm({
@@ -293,6 +314,7 @@ export default function ProfileView({
           address_line_1: joinedAddress,
           address_line_2: "",
           pin_code: "",
+          branch: mappedData.branch,
         });
         localStorage.setItem("user_info", JSON.stringify(userData));
       }
@@ -358,6 +380,7 @@ export default function ProfileView({
           address_line_1: form.address_line_1,
           address_line_2: form.address_line_2,
           pin_code: form.pin_code,
+          branch: form.branch,
         });
         if (response.data.data) {
           await fetchUserData();
@@ -528,6 +551,7 @@ export default function ProfileView({
       state,
       pin_code,
       country,
+      branch: profile.branch || "",
     }));
     // Sync dropdowns for edit mode
     if (country) fetchStates(country);
@@ -551,6 +575,7 @@ export default function ProfileView({
           : profile.address?.address_line_1 || "",
       address_line_2: profile.address?.address_line_2 || "",
       pin_code: profile.address?.pin_code || "",
+      branch: profile.branch || "",
     });
     onCancel?.();
   };
@@ -561,17 +586,17 @@ export default function ProfileView({
 
   return (
     <div
-      style={{
+      style={ {
         padding: "2rem 1rem 4rem",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         background: "#f8fafc",
         minHeight: "100vh",
-      }}
+      } }
     >
-      {/* Google Font */}
-      <style>{`
+      {/* Google Font */ }
+      <style>{ `
         .pv-container { background: #fff; border: 0.5px solid #e5e7eb; border-radius: 2rem; padding: 24px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1); width: 100%; max-width: 550px; }
         .pv-field-card { background: #f8fafc; border: 1px solid #f1f5f9; border-radius: 1.25rem; padding: 16px; display: flex; align-items: flex-start; gap: 12px; }
         .pv-field-card:hover { border-color: #bfdbfe; background: #fff; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); }
@@ -584,17 +609,17 @@ export default function ProfileView({
       `}</style>
 
       <div className="pv-container">
-        {/* Avatar */}
+        {/* Avatar */ }
         <div
-          style={{
+          style={ {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
             marginBottom: "2.5rem",
-          }}
+          } }
         >
           <div
-            style={{
+            style={ {
               width: 110,
               height: 110,
               borderRadius: "50%",
@@ -602,10 +627,10 @@ export default function ProfileView({
               background: "linear-gradient(135deg, #111827, #374151)",
               marginBottom: "1.25rem",
               boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1)",
-            }}
+            } }
           >
             <div
-              style={{
+              style={ {
                 width: "100%",
                 height: "100%",
                 borderRadius: "50%",
@@ -613,44 +638,44 @@ export default function ProfileView({
                 border: "4px solid #fff",
                 background: "#f8fafc",
                 position: "relative",
-              }}
+              } }
             >
               <img
                 src={
                   profile.profile_image
                     ? `https://files.fggroup.in/${profile.profile_image}`
                     : image ||
-                      "https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&auto=format&fit=crop&q=80"
+                    "https://images.unsplash.com/photo-1594381898411-846e7d193883?w=400&auto=format&fit=crop&q=80"
                 }
                 alt="Profile"
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                style={ { width: "100%", height: "100%", objectFit: "cover" } }
               />
-              {loading && (
+              { loading && (
                 <div
-                  style={{
+                  style={ {
                     position: "absolute",
                     inset: 0,
                     background: "rgba(255,255,255,0.7)",
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
-                  }}
+                  } }
                 >
                   <div
                     className="animate-spin"
-                    style={{
+                    style={ {
                       width: 20,
                       height: 20,
                       border: "2px solid #2563eb",
                       borderTopColor: "transparent",
                       borderRadius: "50%",
-                    }}
+                    } }
                   />
                 </div>
-              )}
+              ) }
               <label
                 htmlFor="pv-photo-upload"
-                style={{
+                style={ {
                   position: "absolute",
                   bottom: 0,
                   left: 0,
@@ -663,7 +688,7 @@ export default function ProfileView({
                   cursor: "pointer",
                   opacity: editing ? 1 : 0,
                   transition: "opacity 0.2s",
-                }}
+                } }
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -680,16 +705,16 @@ export default function ProfileView({
                   id="pv-photo-upload"
                   type="file"
                   accept="image/*"
-                  onChange={handlePhotoChange}
-                  style={{ display: "none" }}
-                  disabled={!editing}
+                  onChange={ handlePhotoChange }
+                  style={ { display: "none" } }
+                  disabled={ !editing }
                 />
               </label>
             </div>
           </div>
 
           <div
-            style={{
+            style={ {
               display: "inline-flex",
               alignItems: "center",
               gap: 6,
@@ -703,45 +728,71 @@ export default function ProfileView({
               borderRadius: 20,
               padding: "4px 12px",
               marginBottom: 12,
-            }}
+            } }
           >
             <div
-              style={{
+              style={ {
                 width: 6,
                 height: 6,
                 borderRadius: "50%",
                 background: "#10b981",
-              }}
+              } }
             />
             Active Member
           </div>
 
           <h1
-            style={{
+            style={ {
               fontSize: 28,
               fontWeight: 600,
               color: "#111827",
               margin: "0 0 4px",
               letterSpacing: "-0.03em",
-            }}
+            } }
           >
-            {`${displayData.first_name || ""} ${displayData.last_name || ""}`.trim() ||
-              "Guest User"}
+            { `${displayData.first_name || ""} ${displayData.last_name || ""}`.trim() ||
+              "Guest User" }
           </h1>
         </div>
 
-        {/* Fields Grid */}
+        {/* Fields Grid */ }
         <div
-          style={{
+          style={ {
             width: "100%",
             maxWidth: 500,
             display: "grid",
             gridTemplateColumns: windowWidth < 480 ? "1fr" : "1fr 1fr",
             gap: 12,
             marginBottom: "1.25rem",
-          }}
+          } }
         >
-          {fields.map((field) => {
+          { fields.map((field) => {
+            // Branch field in edit mode
+            if (editing && field.id === "branch") {
+              return (
+                <div
+                  key={ field.id }
+                  className="pv-field-card"
+                  style={ field.full || windowWidth < 480 ? { gridColumn: "1 / -1" } : {} }
+                >
+                  <div style={ { width: 34, height: 34, borderRadius: 8, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#3b82f6" } }>{ field.icon }</div>
+                  <div style={ { flex: 1, minWidth: 0 } }>
+                    <div style={ { fontSize: 14, color: "#64748b", fontWeight: 500, marginBottom: 4 } }>{ field.label }</div>
+                    <select
+                      className="pv-input"
+                      name="branch"
+                      value={ form.branch }
+                      onChange={ handleChange }
+                    >
+                      <option value="">Select Branch</option>
+                      <option value="Vesu">Vesu</option>
+                      <option value="Katargam">Katargam</option>
+                      <option value="Adjan-Branch">Adjan-Branch</option>
+                    </select>
+                  </div>
+                </div>
+              );
+            }
             // For dropdown fields in edit mode
             if (editing && ["country", "state", "city"].includes(field.id)) {
               let options = [];
@@ -759,24 +810,24 @@ export default function ProfileView({
               }
               return (
                 <div
-                  key={field.id}
+                  key={ field.id }
                   className="pv-field-card"
-                  style={field.full || windowWidth < 480 ? { gridColumn: "1 / -1" } : {}}
+                  style={ field.full || windowWidth < 480 ? { gridColumn: "1 / -1" } : {} }
                 >
-                  <div style={{ width: 34, height: 34, borderRadius: 8, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#3b82f6" }}>{field.icon}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 14, color: "#64748b", fontWeight: 500, marginBottom: 4 }}>{field.label}</div>
+                  <div style={ { width: 34, height: 34, borderRadius: 8, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#3b82f6" } }>{ field.icon }</div>
+                  <div style={ { flex: 1, minWidth: 0 } }>
+                    <div style={ { fontSize: 14, color: "#64748b", fontWeight: 500, marginBottom: 4 } }>{ field.label }</div>
                     <select
                       className="pv-input"
-                      name={field.id}
-                      value={value}
-                      onChange={handleChange}
-                      disabled={disabled}
+                      name={ field.id }
+                      value={ value }
+                      onChange={ handleChange }
+                      disabled={ disabled }
                     >
-                      <option value="">Select {field.label}</option>
-                      {options.map((opt, i) => (
-                        <option key={i} value={opt}>{opt}</option>
-                      ))}
+                      <option value="">Select { field.label }</option>
+                      { options.map((opt, i) => (
+                        <option key={ i } value={ opt }>{ opt }</option>
+                      )) }
                     </select>
                   </div>
                 </div>
@@ -786,19 +837,19 @@ export default function ProfileView({
             if (editing && field.id === "pin_code") {
               return (
                 <div
-                  key={field.id}
+                  key={ field.id }
                   className="pv-field-card"
-                  style={field.full || windowWidth < 480 ? { gridColumn: "1 / -1" } : {}}
+                  style={ field.full || windowWidth < 480 ? { gridColumn: "1 / -1" } : {} }
                 >
-                  <div style={{ width: 34, height: 34, borderRadius: 8, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#3b82f6" }}>{field.icon}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ fontSize: 14, color: "#64748b", fontWeight: 500, marginBottom: 4 }}>{field.label}</div>
+                  <div style={ { width: 34, height: 34, borderRadius: 8, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#3b82f6" } }>{ field.icon }</div>
+                  <div style={ { flex: 1, minWidth: 0 } }>
+                    <div style={ { fontSize: 14, color: "#64748b", fontWeight: 500, marginBottom: 4 } }>{ field.label }</div>
                     <input
                       className="pv-input"
                       type="text"
                       name="pin_code"
-                      value={form.pin_code}
-                      onChange={handleChange}
+                      value={ form.pin_code }
+                      onChange={ handleChange }
                       placeholder="Enter Pin Code"
                     />
                   </div>
@@ -808,52 +859,52 @@ export default function ProfileView({
             // All other fields
             return (
               <div
-                key={field.id}
+                key={ field.id }
                 className="pv-field-card"
-                style={field.full || windowWidth < 480 ? { gridColumn: "1 / -1" } : {}}
+                style={ field.full || windowWidth < 480 ? { gridColumn: "1 / -1" } : {} }
               >
-                <div style={{ width: 34, height: 34, borderRadius: 8, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#3b82f6" }}>{field.icon}</div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div style={{ fontSize: 14, color: "#64748b", fontWeight: 500, marginBottom: 4 }}>{field.label}</div>
-                  {editing ? (
+                <div style={ { width: 34, height: 34, borderRadius: 8, background: "#eff6ff", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, color: "#3b82f6" } }>{ field.icon }</div>
+                <div style={ { flex: 1, minWidth: 0 } }>
+                  <div style={ { fontSize: 14, color: "#64748b", fontWeight: 500, marginBottom: 4 } }>{ field.label }</div>
+                  { editing ? (
                     <input
                       className="pv-input"
-                      value={form[field.id] || ""}
-                      name={field.id}
-                      onChange={handleChange}
-                      placeholder={`Enter ${field.label}`}
+                      value={ form[field.id] || "" }
+                      name={ field.id }
+                      onChange={ handleChange }
+                      placeholder={ `Enter ${field.label}` }
                     />
                   ) : (
                     <div
-                      style={{
+                      style={ {
                         fontSize: 14,
                         fontWeight: 500,
                         color: "#111827",
                         overflow: "hidden",
                         textOverflow: "ellipsis",
                         whiteSpace: field.full ? "normal" : "nowrap",
-                      }}
+                      } }
                     >
-                      {field.getValue(displayData)}
+                      { field.getValue(displayData) }
                     </div>
-                  )}
+                  ) }
                 </div>
               </div>
             );
-          })}
+          }) }
 
-          {/* Membership Plan Details (Visible only when plan exists) */}
-          {data.planDetails && (
+          {/* Membership Plan Details (Visible only when plan exists) */ }
+          { data.planDetails && (
             <div
               className="pv-field-card"
-              style={{
+              style={ {
                 gridColumn: "1 / -1",
                 background: "#fdfcfe",
                 borderColor: "#f3e8ff",
-              }}
+              } }
             >
               <div
-                style={{
+                style={ {
                   width: 34,
                   height: 34,
                   borderRadius: 8,
@@ -863,7 +914,7 @@ export default function ProfileView({
                   justifyContent: "center",
                   flexShrink: 0,
                   color: "#8b5cf6",
-                }}
+                } }
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -876,57 +927,57 @@ export default function ProfileView({
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
                 </svg>
               </div>
-              <div style={{ flex: 1 }}>
+              <div style={ { flex: 1 } }>
                 <div
-                  style={{
+                  style={ {
                     fontSize: 14,
                     color: "#7c3aed",
                     fontWeight: 500,
                     marginBottom: 4,
-                  }}
+                  } }
                 >
                   Current Membership
                 </div>
                 <div className="flex flex-col gap-1">
                   <div className="flex justify-between items-center">
                     <span className="text-sm font-bold text-slate-900">
-                      {data.planDetails.program} ({data.planDetails.type})
+                      { data.planDetails.program } ({ data.planDetails.type })
                     </span>
                     <span className="text-xs font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-                      {data.planDetails.price}
+                      { data.planDetails.price }
                     </span>
                   </div>
                   <div className="text-xs text-slate-500 font-medium">
-                    Duration: {data.planDetails.duration}
+                    Duration: { data.planDetails.duration }
                   </div>
                 </div>
               </div>
             </div>
-          )}
+          ) }
         </div>
 
-        {/* Buttons */}
+        {/* Buttons */ }
         <div
-          style={{
+          style={ {
             width: "100%",
             maxWidth: 500,
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
             gap: 10,
-          }}
+          } }
         >
           <button
             className="pv-btn-ghost"
-            onClick={editing ? handleCancel : onBack}
+            onClick={ editing ? handleCancel : onBack }
           >
-            {editing ? "Cancel" : "Back"}
+            { editing ? "Cancel" : "Back" }
           </button>
           <button
             className="pv-btn-edit"
-            onClick={editing ? handleEditSave : handleEditClick}
-            disabled={loading}
+            onClick={ editing ? handleEditSave : handleEditClick }
+            disabled={ loading }
           >
-            {loading ? "Saving..." : editing ? "Save Changes" : "Edit Profile"}
+            { loading ? "Saving..." : editing ? "Save Changes" : "Edit Profile" }
           </button>
         </div>
       </div>
