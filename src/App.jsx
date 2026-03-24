@@ -5,7 +5,7 @@ import GymPage from './Component/Gympage';
 function App() {
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster position="top-right" reverseOrder={false} />
       <GymPage />
     </>
   )

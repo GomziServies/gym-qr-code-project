@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { axiosInstance, publicAxiosInstance } from "../config/api";
 import ProfileView from "./ProfileView";
@@ -276,43 +276,91 @@ export default function GymPage() {
     };
 
     const handleSubmit = async () => {
-        if (form.first_name && form.last_name && form.mobile) {
-            try {
-                // Save to backend
-                console.log("[GymPage] Saving profile data to backend...");
-                await axiosInstance.post("/account/update-profile", {
-                    first_name: form.first_name,
-                    last_name: form.last_name,
-                    mobile: form.mobile,
-                    email: form.email,
-                    branch: form.branch, // Added branch to API call
-                    address_line_1: form.address_line_1,
-                    address_line_2: form.address_line_2,
-                    city: form.city,
-                    state: form.state,
-                    country: form.country,
-                    pin_code: form.pin_code
-                });
 
-                const consolidatedAddress = {
-                    address_line_1: form.address_line_1,
-                    address_line_2: form.address_line_2,
-                    city: form.city,
-                    state: form.state,
-                    country: form.country,
-                    pin_code: form.pin_code
-                };
-                setProfileData({
-                    ...form,
-                    name: `${form.first_name} ${form.last_name}`.trim(),
-                    address: consolidatedAddress
-                });
-                setView("photo");
-            } catch (error) {
-                console.error("[GymPage] Error saving profile:", error);
-                toast.error("Failed to save profile. Please try again.");
-            }
+        if (!form.first_name?.trim()) {
+            toast.error("Please enter First Name");
+            return;
         }
+        if (!form.last_name?.trim()) {
+            toast.error("Please enter Last Name");
+            return;
+        }
+        if (!form.mobile?.trim()) {
+            toast.error("Please enter Mobile Number");
+            return;
+        }
+        if (form.mobile.length !== 10) {
+            toast.error("Please enter a valid 10-digit Mobile Number");
+            return;
+        }
+        if (!form.email?.trim()) {
+            toast.error("Please enter Email ID");
+            return;
+        }
+        if (!form.branch?.trim()) {
+            toast.error("Please select a Branch");
+            return;
+        }
+        if (!form.address_line_1?.trim()) {
+            toast.error("Please enter Address 1");
+            return;
+        }
+        if (!form.address_line_2?.trim()) {
+            toast.error("Please enter Address 2");
+            return;
+        }
+        if (!form.country?.trim()) {
+            toast.error("Please select a Country");
+            return;
+        }
+        if (!form.state?.trim()) {
+            toast.error("Please select a State");
+            return;
+        }
+        if (!form.city?.trim()) {
+            toast.error("Please select a City");
+            return;
+        }
+        if (!form.pin_code?.trim()) {
+            toast.error("Please enter Pin Code");
+            return;
+        }
+        try {
+            // Save to backend
+            console.log("[GymPage] Saving profile data to backend...");
+            await axiosInstance.post("/account/update-profile", {
+                first_name: form.first_name,
+                last_name: form.last_name,
+                mobile: form.mobile,
+                email: form.email,
+                branch: form.branch, // Added branch to API call
+                address_line_1: form.address_line_1,
+                address_line_2: form.address_line_2,
+                city: form.city,
+                state: form.state,
+                country: form.country,
+                pin_code: form.pin_code
+            });
+
+            const consolidatedAddress = {
+                address_line_1: form.address_line_1,
+                address_line_2: form.address_line_2,
+                city: form.city,
+                state: form.state,
+                country: form.country,
+                pin_code: form.pin_code
+            };
+            setProfileData({
+                ...form,
+                name: `${form.first_name} ${form.last_name}`.trim(),
+                address: consolidatedAddress
+            });
+            setView("photo");
+        } catch (error) {
+            console.error("[GymPage] Error saving profile:", error);
+            toast.error("Failed to save profile. Please try again.");
+        }
+
     };
 
     const handlePhotoSubmit = async (image) => {
@@ -523,37 +571,37 @@ export default function GymPage() {
         }`;
 
     return (
-        <div className="h-screen relative overflow-hidden" style={ { margin: 0, padding: 0 } }>
+        <div className="h-screen relative overflow-hidden" style={{ margin: 0, padding: 0 }}>
 
-            {/* ── PREMIUM LIGHT BACKGROUND ── */ }
+            {/* ── PREMIUM LIGHT BACKGROUND ── */}
             <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
                 <div
                     className="absolute inset-0 bg-cover bg-center transition-all duration-700"
-                    style={ {
+                    style={{
                         backgroundImage: `url('https://images.unsplash.com/photo-1540497077202-7c8a3999166f?w=1600&auto=format&fit=crop&q=80')`,
                         filter: 'blur(20px) brightness(1.05)',
                         transform: 'scale(1.1)'
-                    } }
+                    }}
                 />
                 <div className="absolute inset-0 bg-white/75" />
             </div>
 
-            {/* ── HEADER ── */ }
+            {/* ── HEADER ── */}
             <header className="sticky top-0 z-20 bg-white border-b border-slate-200 px-4 sm:px-12 h-16 flex items-center justify-between shadow-sm">
                 <a href="/" className="flex items-center gap-2 no-underline">
-                    <img src={ logo } alt="Gomzi Logo" className="h-10 w-auto object-contain " />
+                    <img src={logo} alt="Gomzi Logo" className="h-10 w-auto object-contain " />
                 </a>
 
                 <div className="flex items-center gap-3">
-                    { !isLoggedIn ? (
-                        <button onClick={ () => setShowLogin(true) }
+                    {!isLoggedIn ? (
+                        <button onClick={() => setShowLogin(true)}
                             className="text-sm font-medium text-white bg-blue-600 rounded-lg px-5 py-2 cursor-pointer hover:bg-blue-700 transition-colors shadow-sm">
                             Login
                         </button>
                     ) : (
                         <div className="relative">
                             <button
-                                onClick={ () => setDropdownOpen(!dropdownOpen) }
+                                onClick={() => setDropdownOpen(!dropdownOpen)}
                                 className="flex items-center gap-2 cursor-pointer bg-transparent border-none"
                             >
                                 <div className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white select-none hover:bg-blue-700 transition-all shadow-md">
@@ -564,10 +612,10 @@ export default function GymPage() {
                                 </div>
                             </button>
 
-                            { dropdownOpen && (
+                            {dropdownOpen && (
                                 <div className="absolute right-0 mt-2 w-48 bg-white border border-slate-200 rounded-xl shadow-xl overflow-hidden z-50 py-1">
                                     <button
-                                        onClick={ () => { setView("profile"); setDropdownOpen(false); } }
+                                        onClick={() => { setView("profile"); setDropdownOpen(false); }}
                                         className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-slate-700 hover:bg-blue-50 hover:text-blue-600 transition-colors cursor-pointer border-none bg-transparent text-left"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -578,7 +626,7 @@ export default function GymPage() {
                                     </button>
                                     <div className="border-t border-slate-100 mx-2" />
                                     <button
-                                        onClick={ () => {
+                                        onClick={() => {
                                             localStorage.removeItem("fg_group_user_authorization");
                                             localStorage.removeItem("user_info");
                                             setIsLoggedIn(false);
@@ -598,7 +646,7 @@ export default function GymPage() {
                                                 pin_code: ""
                                             });
                                             setProfileData(null);
-                                        } }
+                                        }}
                                         className="w-full flex items-center gap-3 px-4 py-3 text-sm font-bold text-red-500 hover:bg-red-50 transition-colors cursor-pointer border-none bg-transparent text-left"
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-red-500">
@@ -609,15 +657,15 @@ export default function GymPage() {
                                         Logout
                                     </button>
                                 </div>
-                            ) }
+                            )}
                         </div>
-                    ) }
+                    )}
                 </div>
             </header>
 
-            {/* ── CONTENT SECTION ── */ }
+            {/* ── CONTENT SECTION ── */}
             <div className="h-[calc(100vh-64px)] overflow-y-auto relative z-10">
-                { view === "form" && (
+                {view === "form" && (
                     <div className="flex flex-col items-center justify-center px-4 py-6 min-h-full">
                         <div className="text-center w-full max-w-lg mb-6">
                             <h1 className="text-2xl sm:text-3xl font-semibold text-slate-800 mb-2">Membership Registration</h1>
@@ -627,57 +675,57 @@ export default function GymPage() {
                         <div className="w-full max-w-lg">
                             <div className="w-full max-w-lg bg-white/95 backdrop-blur-md p-6 sm:p-10 rounded-[2rem] shadow-2xl border border-white/50 text-left">
 
-                                { !isLoggedIn && (
+                                {!isLoggedIn && (
                                     <div className="mb-5 bg-amber-50 border border-amber-200 rounded-lg px-4 py-3 flex items-center gap-2">
                                         <span className="text-amber-500 text-sm">⚠</span>
                                         <p className="text-amber-700 text-xs font-medium">Please login first to fill this form</p>
                                     </div>
-                                ) }
+                                )}
 
                                 <div className="space-y-4">
                                     <div className="grid grid-cols-2 gap-4">
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-1.5">First Name</label>
-                                            <input type="text" name="first_name" value={ form.first_name }
-                                                onChange={ handleChange } onClick={ handleFieldClick }
-                                                readOnly={ !isLoggedIn } placeholder="First name"
-                                                className={ fieldClass(isLoggedIn) } />
+                                            <input type="text" name="first_name" value={form.first_name}
+                                                onChange={handleChange} onClick={handleFieldClick}
+                                                readOnly={!isLoggedIn} placeholder="First name"
+                                                className={fieldClass(isLoggedIn)} />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-1.5">Last Name</label>
-                                            <input type="text" name="last_name" value={ form.last_name }
-                                                onChange={ handleChange } onClick={ handleFieldClick }
-                                                readOnly={ !isLoggedIn } placeholder="Last name"
-                                                className={ fieldClass(isLoggedIn) } />
+                                            <input type="text" name="last_name" value={form.last_name}
+                                                onChange={handleChange} onClick={handleFieldClick}
+                                                readOnly={!isLoggedIn} placeholder="Last name"
+                                                className={fieldClass(isLoggedIn)} />
                                         </div>
                                     </div>
 
                                     <div>
                                         <label className="block text-sm font-medium text-slate-700 mb-1.5">Mobile Number</label>
-                                        <input type="tel" name="mobile" value={ form.mobile }
-                                            onChange={ handleChange } onClick={ handleFieldClick }
-                                            readOnly={ !isLoggedIn } placeholder="Enter your mobile number" maxLength={ 10 }
-                                            className={ fieldClass(isLoggedIn) } />
+                                        <input type="tel" name="mobile" value={form.mobile}
+                                            onChange={handleChange} onClick={handleFieldClick}
+                                            readOnly={!isLoggedIn} placeholder="Enter your mobile number" maxLength={10}
+                                            className={fieldClass(isLoggedIn)} />
                                     </div>
 
                                     <div>
                                         <label className="block text-sm font-medium text-slate-700 mb-1.5">Email ID</label>
-                                        <input type="email" name="email" value={ form.email }
-                                            onChange={ handleChange } onClick={ handleFieldClick }
-                                            readOnly={ !isLoggedIn } placeholder="Enter your email address"
-                                            className={ fieldClass(isLoggedIn) } />
+                                        <input type="email" name="email" value={form.email}
+                                            onChange={handleChange} onClick={handleFieldClick}
+                                            readOnly={!isLoggedIn} placeholder="Enter your email address"
+                                            className={fieldClass(isLoggedIn)} />
                                     </div>
 
-                                    {/* Branch Selection */ }
+                                    {/* Branch Selection */}
                                     <div>
                                         <label className="block text-sm font-medium text-slate-700 mb-1.5">Branch</label>
                                         <select
                                             name="branch"
-                                            value={ form.branch }
-                                            onChange={ handleChange }
-                                            onClick={ handleFieldClick }
-                                            disabled={ !isLoggedIn }
-                                            className={ fieldClass(isLoggedIn) }
+                                            value={form.branch}
+                                            onChange={handleChange}
+                                            onClick={handleFieldClick}
+                                            disabled={!isLoggedIn}
+                                            className={fieldClass(isLoggedIn)}
                                         >
                                             <option value="">Select Branch</option>
                                             <option value="Vesu">Vesu</option>
@@ -686,74 +734,74 @@ export default function GymPage() {
                                         </select>
                                     </div>
 
-                                    {/* ADDRESS SECTION */ }
+                                    {/* ADDRESS SECTION */}
                                     <div className="space-y-4 pt-2">
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-1.5">Address 1</label>
-                                            <input type="text" name="address_line_1" value={ form.address_line_1 }
-                                                onChange={ handleChange } onClick={ handleFieldClick }
-                                                readOnly={ !isLoggedIn } placeholder="Enter address line 1"
-                                                className={ fieldClass(isLoggedIn) } />
+                                            <input type="text" name="address_line_1" value={form.address_line_1}
+                                                onChange={handleChange} onClick={handleFieldClick}
+                                                readOnly={!isLoggedIn} placeholder="Enter address line 1"
+                                                className={fieldClass(isLoggedIn)} />
                                         </div>
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-1.5">Address 2</label>
-                                            <input type="text" name="address_line_2" value={ form.address_line_2 }
-                                                onChange={ handleChange } onClick={ handleFieldClick }
-                                                readOnly={ !isLoggedIn } placeholder="Enter address line 2"
-                                                className={ fieldClass(isLoggedIn) } />
+                                            <input type="text" name="address_line_2" value={form.address_line_2}
+                                                onChange={handleChange} onClick={handleFieldClick}
+                                                readOnly={!isLoggedIn} placeholder="Enter address line 2"
+                                                className={fieldClass(isLoggedIn)} />
                                         </div>
 
                                         <div className="grid grid-cols-3 gap-3">
                                             <div>
                                                 <label className="block text-sm font-medium text-slate-700 mb-1.5">Country</label>
-                                                <select name="country" value={ form.country }
-                                                    onChange={ handleChange } onClick={ handleFieldClick }
-                                                    disabled={ !isLoggedIn || loadingCountries }
-                                                    className={ fieldClass(isLoggedIn, loadingCountries) }>
+                                                <select name="country" value={form.country}
+                                                    onChange={handleChange} onClick={handleFieldClick}
+                                                    disabled={!isLoggedIn || loadingCountries}
+                                                    className={fieldClass(isLoggedIn, loadingCountries)}>
                                                     <option value="">Select Country</option>
-                                                    { countries.map((c, i) => (
-                                                        <option key={ i } value={ c.name }>{ c.name }</option>
-                                                    )) }
+                                                    {countries.map((c, i) => (
+                                                        <option key={i} value={c.name}>{c.name}</option>
+                                                    ))}
                                                 </select>
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-slate-700 mb-1.5">State</label>
-                                                <select name="state" value={ form.state }
-                                                    onChange={ handleChange } onClick={ handleFieldClick }
-                                                    disabled={ !isLoggedIn || loadingStates || !form.country }
-                                                    className={ fieldClass(isLoggedIn, loadingStates || !form.country) }>
+                                                <select name="state" value={form.state}
+                                                    onChange={handleChange} onClick={handleFieldClick}
+                                                    disabled={!isLoggedIn || loadingStates || !form.country}
+                                                    className={fieldClass(isLoggedIn, loadingStates || !form.country)}>
                                                     <option value="">Select State</option>
-                                                    { states.map((s, i) => (
-                                                        <option key={ i } value={ s.name }>{ s.name }</option>
-                                                    )) }
+                                                    {states.map((s, i) => (
+                                                        <option key={i} value={s.name}>{s.name}</option>
+                                                    ))}
                                                 </select>
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-slate-700 mb-1.5">City</label>
-                                                <select name="city" value={ form.city }
-                                                    onChange={ handleChange } onClick={ handleFieldClick }
-                                                    disabled={ !isLoggedIn || loadingCities || !form.state }
-                                                    className={ fieldClass(isLoggedIn, loadingCities || !form.state) }>
+                                                <select name="city" value={form.city}
+                                                    onChange={handleChange} onClick={handleFieldClick}
+                                                    disabled={!isLoggedIn || loadingCities || !form.state}
+                                                    className={fieldClass(isLoggedIn, loadingCities || !form.state)}>
                                                     <option value="">Select City</option>
-                                                    { cities.map((city, i) => (
-                                                        <option key={ i } value={ city }>{ city }</option>
-                                                    )) }
+                                                    {cities.map((city, i) => (
+                                                        <option key={i} value={city}>{city}</option>
+                                                    ))}
                                                 </select>
                                             </div>
                                         </div>
 
                                         <div>
                                             <label className="block text-sm font-medium text-slate-700 mb-1.5">Pin Code</label>
-                                            <input type="text" name="pin_code" value={ form.pin_code }
-                                                onChange={ handleChange } onClick={ handleFieldClick }
-                                                readOnly={ !isLoggedIn } placeholder="Pin code"
-                                                className={ fieldClass(isLoggedIn) } />
+                                            <input type="text" name="pin_code" value={form.pin_code}
+                                                onChange={handleChange} onClick={handleFieldClick}
+                                                readOnly={!isLoggedIn} placeholder="Pin code"
+                                                className={fieldClass(isLoggedIn)} />
                                         </div>
                                     </div>
 
                                     <button
-                                        disabled={ !isLoggedIn }
-                                        onClick={ handleSubmit }
+                                        disabled={!isLoggedIn}
+                                        onClick={handleSubmit}
                                         className="w-full bg-blue-600 text-white text-sm font-semibold rounded-lg py-2.5 hover:bg-blue-700 transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed mt-2">
                                         Submit
                                     </button>
@@ -761,64 +809,64 @@ export default function GymPage() {
                             </div>
                         </div>
                     </div>
-                ) }
+                )}
 
-                { view === "photo" && (
+                {view === "photo" && (
                     <PhotoCapture
-                        initialImage={ profileData?.profile_image }
-                        onNext={ handlePhotoSubmit }
-                        onBack={ () => setView("form") }
+                        initialImage={profileData?.profile_image}
+                        onNext={handlePhotoSubmit}
+                        onBack={() => setView("form")}
                     />
-                ) }
+                )}
 
-                { view === "plan" && (
+                {view === "plan" && (
                     <PlanSelection
-                        subStep={ planSubStep }
-                        setSubStep={ setPlanSubStep }
-                        selections={ planSelections }
-                        setSelections={ setPlanSelections }
-                        onSelect={ handlePlanSelect }
-                        onBack={ () => setView("photo") }
+                        subStep={planSubStep}
+                        setSubStep={setPlanSubStep}
+                        selections={planSelections}
+                        setSelections={setPlanSelections}
+                        onSelect={handlePlanSelect}
+                        onBack={() => setView("photo")}
                     />
-                ) }
+                )}
 
-                { view === "terms" && (
+                {view === "terms" && (
                     <TermsAndConditions
-                        onProceed={ handleTermsAgreed }
-                        onBack={ () => setView("plan") }
-                        isLoading={ isPaymentLoading }
+                        onProceed={handleTermsAgreed}
+                        onBack={() => setView("plan")}
+                        isLoading={isPaymentLoading}
                     />
-                ) }
+                )}
 
-                { view === "success" && (
+                {view === "success" && (
                     <PaymentSuccess
-                        planData={ selectedPlan }
-                        userEmail={ profileData?.email }
-                        onProceed={ handleSuccessProceed }
+                        planData={selectedPlan}
+                        userEmail={profileData?.email}
+                        onProceed={handleSuccessProceed}
                     />
-                ) }
+                )}
 
-                { view === "profile" && (
+                {view === "profile" && (
                     <ProfileView
-                        data={ {
+                        data={{
                             ...(profileData || {}),
                             plan: selectedPlan?.title,
                             planDetails: selectedPlan?.details
-                        } }
-                        image={ capturedImage }
-                        onBack={ () => setView("form") }
-                        onCancel={ () => setView("form") }
-                        onEdit={ (newData) => {
+                        }}
+                        image={capturedImage}
+                        onBack={() => setView("form")}
+                        onCancel={() => setView("form")}
+                        onEdit={(newData) => {
                             setProfileData(prev => ({ ...prev, ...newData }));
-                        } }
+                        }}
                     />
-                ) }
+                )}
             </div>
 
             <LoginModal
-                isOpen={ showLogin }
-                onClose={ handleLoginClose }
-                onLoginSuccess={ handleLoginSuccess }
+                isOpen={showLogin}
+                onClose={handleLoginClose}
+                onLoginSuccess={handleLoginSuccess}
             />
         </div>
     );
