@@ -377,7 +377,7 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
 
                 <button
                     onClick={goBack}
-                    className="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-all border-none bg-white/50 backdrop-blur-sm px-4 py-2 rounded-xl cursor-pointer shadow-sm hover:shadow-md mx-auto"
+                    className="flex items-center gap-2 text-slate-600 hover:text-blue-600 font-bold transition-all border-none bg-white/50 backdrop-blur-sm px-4 py-2 rounded-xl cursor-pointer shadow-sm hover:shadow-md mx-auto mb-4"
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="19" y1="12" x2="5" y2="12" /><polyline points="12 19 5 12 12 5" /></svg>
                     Back to {subStep === "main" ? "Photo Capture" : "Previous Selection"}
