@@ -25,7 +25,7 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
 
     useEffect(() => {
         const hostname = window.location.hostname;
-        const isProduction = hostname.includes("gym-qr.netlify.app") && 
+        const isProduction = hostname.includes("offers.fggroup.in") && 
                            !hostname.includes("test.fggroup.in") && 
                            !hostname.includes("dev");
 

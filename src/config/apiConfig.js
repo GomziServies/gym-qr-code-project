@@ -5,7 +5,7 @@ let fwgBaseUrl = "http://localhost:80";
 let razorpayMerchantId = "rzp_test_F0TUZmabOwKkhe";
 let environment = "development";
 
-if (hostname === "gym-qr.netlify.app" || hostname === "https://gym-qr.netlify.app") {
+if (hostname === "offers.fggroup.in" || hostname === "https://offers.fggroup.in") {
   baseUrl = "https://api.fggroup.in";
   fwgBaseUrl = 'https://app-api.fggroup.in';
   environment = 'production'
