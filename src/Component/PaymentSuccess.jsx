@@ -87,10 +87,10 @@ export default function PaymentSuccess({ planData, userEmail, onProceed }) {
                     </div>
 
                     <button 
-                        onClick={onProceed}
+                        onClick={() => window.open('https://fggroup.in/', '_blank')}
                         className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-bold text-lg transition-all shadow-xl hover:shadow-blue-200 active:scale-[0.98] cursor-pointer"
                     >
-                        View My Profile
+                        View Website
                     </button>
                     
                     <p className="text-center text-slate-400 text-[10px] mt-6 font-bold uppercase tracking-widest leading-relaxed">
