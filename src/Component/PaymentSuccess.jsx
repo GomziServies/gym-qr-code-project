@@ -35,7 +35,7 @@ export default function PaymentSuccess({ planData, userEmail, onProceed }) {
                             </svg>
                         </div>
                         <h2 className="text-2xl sm:text-3xl font-bold mb-1">Payment Successful!</h2>
-                        <p className="text-emerald-50 opacity-90 text-xs sm:text-sm">Welcome to the GymFit Family</p>
+                        <p className="text-emerald-50 opacity-90 text-xs sm:text-sm">Welcome to the Fitness With Gomzi</p>
                     </div>
                 </div>
 

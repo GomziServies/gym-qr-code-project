@@ -520,7 +520,7 @@ export default function GymPage() {
                     key: orderDetails.key,
                     amount: orderDetails.amount,
                     currency: orderDetails.currency,
-                    name: "Gomzi Style",
+                    name: "Fitness With Gomzi",
                     description: orderDetails.description,
                     order_id: orderDetails.order_id,
                     handler: function (response) {
