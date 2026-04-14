@@ -4,21 +4,21 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
     // State is now lifted to Gympage.jsx
 
     const mainPlans = [
-        { id: "premium", title: "Premium Membership", description: "Exclusive premium gym access with all perks", icon: "👑" },
-        { id: "membership", title: "Membership Plan", description: "Standard gym membership with full access", icon: "💎" },
-        { id: "rtp", title: "RTP: 1", description: "Customized Personal Training & Diet Plan", icon: "🔥" }
+        { id: "premium", title: "Premium Membership", description: "Exclusive premium gym access with all perks" },
+        // { id: "membership", title: "Membership Plan", description: "Standard gym membership with full access" },
+        { id: "rtp", title: "RTP: 1", description: "Customized Personal Training & Diet Plan" }
     ];
 
     const programs = [
-        { id: "gym", title: "Gym Membership Plan", icon: "💪" },
-        { id: "zumba", title: "Zumba Membership Plan", icon: "💃" },
-        { id: "yoga", title: "Yoga Membership Plan", icon: "🧘" }
+        { id: "gym", title: "Gym Membership Plan" },
+        { id: "zumba", title: "Zumba Membership Plan" },
+        { id: "yoga", title: "Yoga Membership Plan" }
     ];
 
     const types = [
-        { id: "male", title: "Male Membership", icon: "👨" },
-        { id: "female", title: "Female Membership", icon: "👩" },
-        { id: "couple", title: "Couple Membership", icon: "👫" }
+        { id: "male", title: "Male Membership" },
+        { id: "female", title: "Female Membership" },
+        { id: "couple", title: "Couple Membership" }
     ];
     
     const [pricingData, setPricingData] = useState({});
@@ -108,7 +108,7 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                 },
                 premium: {
                     premium: [
-                        { id: "69bd428e9f35a4d48ab5609f", title: "12 Months", price: "₹21,000" }
+                        { id: "69bd428e9f35a4d48ab5609f", title: "12 Months", price: "₹27,000" }
                     ]
                 }
             });
@@ -191,7 +191,7 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                 },
                 premium: {
                     premium: [
-                        { id: "69bd2062bc0fa93c777cd075", title: "12 Months", price: "₹21,000" }
+                        { id: "69bd2062bc0fa93c777cd075", title: "12 Months", price: "₹27,000" }
                     ]
                 }
             });
@@ -251,10 +251,12 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
 
     const Card = ({ item, onClick, showPrice }) => (
         <div onClick={() => onClick(item)} className="plan-card group">
-            <div className="flex justify-between items-start">
-                <div className="icon-circle group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    {item.icon || (showPrice ? "💰" : "📋")}
-                </div>
+            <div className={`flex items-start ${showPrice ? "justify-between" : "justify-end"}`}>
+                {showPrice && (
+                    <div className="icon-circle group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        💰
+                    </div>
+                )}
                 {(item.id === "membership" || item.id === "premium") && (
                     <div className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
                         Popular
