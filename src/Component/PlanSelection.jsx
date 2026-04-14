@@ -4,11 +4,35 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
     // State is now lifted to Gympage.jsx
 
     const mainPlans = [
-        { id: "premium", title: "Premium Membership", description: "Exclusive premium gym access with all perks" },
-        // { id: "membership", title: "Membership Plan", description: "Standard gym membership with full access" },
-        { id: "rtp", title: "RTP: 1", description: "Customized Personal Training & Diet Plan" }
+        { 
+            id: "premium", 
+            title: "Premium Membership", 
+            description: "Exclusive premium gym access with all perks",
+            features: [
+                "One-Time Body Consultation",
+                "One-Time Diet Plan",
+                "One-Time Exercise Plan",
+                "Till Membership: Zumba, Tabata & Aerobics Sessions"
+            ]
+        },
+        {
+            id: "rtp",
+            title: "RTP: 1",
+            description: "Customized Personal Training & Diet Plan",
+            features: [
+                "One-on-One Personal Training",
+                "Personalized Consultation",
+                "Customized Diet Plan",
+                "Diet Plan Updates Every 15–20 Days",
+                "Daily Diet & Exercise Updates",
+                "Access Till Membership Duration: Zumba Sessions",
+                "Therapy Support",
+                "Activities & Events Including Aerobics, Tabata & Zumba Sessions"
+            ]
+        }
     ];
 
+    /*
     const programs = [
         { id: "gym", title: "Gym Membership Plan" },
         { id: "zumba", title: "Zumba Membership Plan" },
@@ -20,18 +44,20 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
         { id: "female", title: "Female Membership" },
         { id: "couple", title: "Couple Membership" }
     ];
-    
+    */
+
     const [pricingData, setPricingData] = useState({});
 
     useEffect(() => {
         const hostname = window.location.hostname;
-        const isProduction = hostname.includes("offers.fggroup.in") && 
-                           !hostname.includes("test.fggroup.in") && 
-                           !hostname.includes("dev");
+        const isProduction = hostname.includes("offers.fggroup.in") &&
+            !hostname.includes("test.fggroup.in") &&
+            !hostname.includes("dev");
 
         if (isProduction) {
             setPricingData({
                 gym: {
+                    /*
                     male: [
                         { id: "69bd43399f35a4d48ab562ee", title: "1 Month", price: "₹2,000" },
                         { id: "69bd1bc2bc0fa93c777cd039", title: "3 Months", price: "₹5,000" },
@@ -48,6 +74,14 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                         { id: "69bd446e9f35a4d48ab56608", title: "3 Months", price: "₹8,500" },
                         { id: "69bd44919f35a4d48ab56610", title: "6 Months", price: "₹14,500" },
                         { id: "69bd44b19f35a4d48ab56617", title: "12 Months", price: "₹20,000" }
+                    ]
+                    */
+                    gym: [
+                        { id: "gym_1m", title: "1 Month Plan", price: "₹3,700" },
+                        { id: "gym_3m", title: "3 Months Plan", price: "₹8,700" },
+                        { id: "gym_6m", title: "6 Months Plan", price: "₹15,700" },
+                        { id: "gym_9m", title: "9 Months Plan", price: "₹21,700" },
+                        { id: "gym_12m", title: "12 Months Plan (Best Value)", price: "₹27,000" }
                     ]
                 },
                 zumba: {
@@ -89,32 +123,43 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                     ]
                 },
                 rtp: {
-                    male: [
-                        { id: "69bd47829f35a4d48ab567c2", title: "1 Month", price: "₹9,000" },
-                        { id: "69bd47989f35a4d48ab567c4", title: "3 Months", price: "₹23,000" },
-                        { id: "69bd47aa9f35a4d48ab567c8", title: "6 Months", price: "₹39,000" },
-                        { id: "69bd47c19f35a4d48ab567ca", title: "12 Months", price: "₹49,000" }
-                    ],
-                    female: [
-                        { id: "69bd47d99f35a4d48ab567cc", title: "1 Month", price: "₹9,000" },
-                        { id: "69bd47eb9f35a4d48ab567d0", title: "3 Months", price: "₹23,000" },
-                        { id: "69bd47fe9f35a4d48ab567d2", title: "6 Months", price: "₹39,000" },
-                        { id: "69bd48119f35a4d48ab567d4", title: "12 Months", price: "₹49,000" }
-                    ],
-                    couple: [
-                        { id: "69bd484f9f35a4d48ab567da", title: "6 Months", price: "₹63,000" },
-                        { id: "69bd48389f35a4d48ab567d8", title: "12 Months", price: "₹81,000" }
+                    // male: [
+                    //     { id: "69bd47829f35a4d48ab567c2", title: "1 Month", price: "₹9,000" },
+                    //     { id: "69bd47989f35a4d48ab567c4", title: "3 Months", price: "₹23,000" },
+                    //     { id: "69bd47aa9f35a4d48ab567c8", title: "6 Months", price: "₹39,000" },
+                    //     { id: "69bd47c19f35a4d48ab567ca", title: "12 Months", price: "₹49,000" }
+                    // ],
+                    // female: [
+                    //     { id: "69bd47d99f35a4d48ab567cc", title: "1 Month", price: "₹9,000" },
+                    //     { id: "69bd47eb9f35a4d48ab567d0", title: "3 Months", price: "₹23,000" },
+                    //     { id: "69bd47fe9f35a4d48ab567d2", title: "6 Months", price: "₹39,000" },
+                    //     { id: "69bd48119f35a4d48ab567d4", title: "12 Months", price: "₹49,000" }
+                    // ],
+                    // couple: [
+                    //     { id: "69bd484f9f35a4d48ab567da", title: "6 Months", price: "₹63,000" },
+                    //     { id: "69bd48389f35a4d48ab567d8", title: "12 Months", price: "₹81,000" }
+                    // ],
+                    rtp: [
+                        { id: "69de2a9b2c33128dc42cae2f", title: "1 Month", price: "₹9,000" },
+                        { id: "69de2a872c33128dc42cae2d", title: "3 Months", price: "₹19,000" },
+                        { id: "69de2a682c33128dc42cae17", title: "6 Months", price: "₹43,000" },
+                        { id: "69de29c52c33128dc42cadda", title: "12 Months (Best Value)", price: "₹61,000" }
                     ]
                 },
                 premium: {
                     premium: [
-                        { id: "69bd428e9f35a4d48ab5609f", title: "12 Months", price: "₹27,000" }
+                        { id: "69de31982c33128dc42cb3f7", title: "1 Month Plan", price: "₹3,700" },
+                        { id: "69de31af2c33128dc42cb3fe", title: "3 Months Plan", price: "₹8,700 (₹2,900/month)" },
+                        { id: "69de31cc2c33128dc42cb416", title: "6 Months Plan", price: "₹15,700 (₹2,616/month approx.)" },
+                        { id: "69de322e2c33128dc42cb46a", title: "9 Months Plan", price: "₹21,700 (₹2,411/month approx.)" },
+                        { id: "69de32492c33128dc42cb46f", title: "12 Months Plan (Best Value)", price: "₹27,000 (₹2,250/month)" }
                     ]
                 }
             });
         } else {
             setPricingData({
                 gym: {
+                    /*
                     male: [
                         { id: "69b7e594f78450f0afc197ce", title: "1 Month", price: "₹2,000" },
                         { id: "69b7e5c7f78450f0afc197d0", title: "3 Months", price: "₹5,000" },
@@ -131,6 +176,14 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                         { id: "69bd1c49bc0fa93c777cd040", title: "3 Months", price: "₹8,500" },
                         { id: "69bd1c71bc0fa93c777cd042", title: "6 Months", price: "₹14,500" },
                         { id: "69bd1c95bc0fa93c777cd044", title: "12 Months", price: "₹20,000" }
+                    ]
+                    */
+                    gym: [
+                        { id: "gym_1m", title: "1 Month Plan", price: "₹3,700" },
+                        { id: "gym_3m", title: "3 Months Plan", price: "₹8,700" },
+                        { id: "gym_6m", title: "6 Months Plan", price: "₹15,700" },
+                        { id: "gym_9m", title: "9 Months Plan", price: "₹21,700" },
+                        { id: "gym_12m", title: "12 Months Plan (Best Value)", price: "₹27,000" }
                     ]
                 },
                 zumba: {
@@ -172,26 +225,36 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                     ]
                 },
                 rtp: {
-                    male: [
-                        { id: "69bd20e7bc0fa93c777cd078", title: "1 Month", price: "₹9,000" },
-                        { id: "69bd210bbc0fa93c777cd07a", title: "3 Months", price: "₹23,000" },
-                        { id: "69bd2124bc0fa93c777cd07c", title: "6 Months", price: "₹39,000" },
-                        { id: "69bd213cbc0fa93c777cd07e", title: "12 Months", price: "₹49,000" }
-                    ],
-                    female: [
-                        { id: "69bd2161bc0fa93c777cd080", title: "1 Month", price: "₹9,000" },
-                        { id: "69bd217dbc0fa93c777cd082", title: "3 Months", price: "₹23,000" },
-                        { id: "69bd219dbc0fa93c777cd084", title: "6 Months", price: "₹39,000" },
-                        { id: "69bd21b3bc0fa93c777cd087", title: "12 Months", price: "₹49,000" }
-                    ],
-                    couple: [
-                        { id: "69bd21e1bc0fa93c777cd089", title: "6 Months", price: "₹63,000" },
-                        { id: "69bd21f9bc0fa93c777cd08b", title: "12 Months", price: "₹81,000" }
+                    // male: [
+                    //     { id: "69bd20e7bc0fa93c777cd078", title: "1 Month", price: "₹9,000" },
+                    //     { id: "69bd210bbc0fa93c777cd07a", title: "3 Months", price: "₹23,000" },
+                    //     { id: "69bd2124bc0fa93c777cd07c", title: "6 Months", price: "₹39,000" },
+                    //     { id: "69bd213cbc0fa93c777cd07e", title: "12 Months", price: "₹49,000" }
+                    // ],
+                    // female: [
+                    //     { id: "69bd2161bc0fa93c777cd080", title: "1 Month", price: "₹9,000" },
+                    //     { id: "69bd217dbc0fa93c777cd082", title: "3 Months", price: "₹23,000" },
+                    //     { id: "69bd219dbc0fa93c777cd084", title: "6 Months", price: "₹39,000" },
+                    //     { id: "69bd21b3bc0fa93c777cd087", title: "12 Months", price: "₹49,000" }
+                    // ],
+                    // couple: [
+                    //     { id: "69bd21e1bc0fa93c777cd089", title: "6 Months", price: "₹63,000" },
+                    //     { id: "69bd21f9bc0fa93c777cd08b", title: "12 Months", price: "₹81,000" }
+                    // ]
+                    rtp: [
+                        { id: "69de286bcbb25e5981236b36", title: "1 Month", price: "₹9,000" },
+                        { id: "69de2896cbb25e5981236b38", title: "3 Months", price: "₹19,000" },
+                        { id: "69de28accbb25e5981236b3a", title: "6 Months", price: "₹43,000" },
+                        { id: "69de28c2cbb25e5981236b3d", title: "12 Months (Best Value)", price: "₹61,000" }
                     ]
                 },
                 premium: {
                     premium: [
-                        { id: "69bd2062bc0fa93c777cd075", title: "12 Months", price: "₹27,000" }
+                        { id: "69de32f7cbb25e5981236bd7", title: "1 Month Plan", price: "₹3,700" },
+                        { id: "69de32e1cbb25e5981236bd5", title: "3 Months Plan", price: "₹8,700 (₹2,900/month)" },
+                        { id: "69de32c6cbb25e5981236bd3", title: "6 Months Plan", price: "₹15,700 (₹2,616/month approx.)" },
+                        { id: "69de32a0cbb25e5981236bd1", title: "9 Months Plan", price: "₹21,700 (₹2,411/month approx.)" },
+                        { id: "69de3273cbb25e5981236bcf", title: "12 Months Plan (Best Value)", price: "₹27,000 (₹2,250/month)" }
                     ]
                 }
             });
@@ -199,7 +262,7 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
     }, []);
 
     const handleMainSelect = (plan) => {
-        if (plan.id === "premium") {
+        if (plan.id === "premium" || plan.id === "rtp") {
             setSelections({
                 ...selections,
                 plan: plan.title,
@@ -209,25 +272,9 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                 typeId: plan.id
             });
             setSubStep("duration");
-        } else {
-            setSelections({ ...selections, plan: plan.title, program: plan.title, programId: plan.id });
-            if (plan.id === "membership") {
-                setSubStep("program");
-            } else {
-                setSubStep("type");
-            }
         }
     };
 
-    const handleProgramSelect = (program) => {
-        setSelections({ ...selections, program: program.title, programId: program.id });
-        setSubStep("type");
-    };
-
-    const handleTypeSelect = (type) => {
-        setSelections({ ...selections, type: type.title, typeId: type.id });
-        setSubStep("duration");
-    };
 
     const handleDurationSelect = (duration) => {
         const finalTitle = selections.plan === "Premium Membership"
@@ -237,14 +284,8 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
     };
 
     const goBack = () => {
-        if (subStep === "program") setSubStep("main");
-        else if (subStep === "type") {
-            if (selections.programId === "rtp") setSubStep("main");
-            else setSubStep("program");
-        }
-        else if (subStep === "duration") {
-            if (selections.plan === "Premium Membership") setSubStep("main");
-            else setSubStep("type");
+        if (subStep === "duration") {
+            setSubStep("main");
         }
         else onBack();
     };
@@ -257,7 +298,7 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                         💰
                     </div>
                 )}
-                {(item.id === "membership" || item.id === "premium") && (
+                {item.id === "premium" && (
                     <div className="bg-blue-50 text-blue-600 text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">
                         Popular
                     </div>
@@ -360,21 +401,34 @@ export default function PlanSelection({ subStep, setSubStep, selections, setSele
                             <Card item={p} onClick={handleMainSelect} />
                         </div>
                     ))}
-                    {subStep === "program" && programs.map(p => (
-                        <div key={p.id} className="w-full sm:w-[320px] flex">
-                            <Card item={p} onClick={handleProgramSelect} />
-                        </div>
-                    ))}
-                    {subStep === "type" && types.map(t => (
-                        <div key={t.id} className="w-full sm:w-[320px] flex">
-                            <Card item={t} onClick={handleTypeSelect} />
-                        </div>
-                    ))}
+
                     {subStep === "duration" && pricingData[selections.programId]?.[selections.typeId]?.map(d => (
-                        <div key={d.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[240px] flex">
+                        <div key={d.id} className="w-full sm:w-[calc(50%-12px)] lg:w-[230px] flex">
                             <Card item={d} onClick={handleDurationSelect} showPrice />
                         </div>
                     ))}
+
+                    {subStep === "duration" && (selections.programId === "rtp" || selections.programId === "premium") && (
+                        <div className="w-full max-w-5xl bg-white/60 backdrop-blur-md rounded-[2.5rem] p-6 sm:p-10 mb-8 border border-white/40 shadow-xl overflow-hidden relative group mt-8">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full -mr-32 -mt-32 blur-3xl group-hover:bg-blue-500/10 transition-colors"></div>
+                            <h4 className="text-xl sm:text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
+                                <span className="p-2 bg-blue-600 text-white rounded-xl shadow-lg shadow-blue-200">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </span>
+                                Included in this Membership
+                            </h4>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
+                                {mainPlans.find(p => p.id === selections.programId)?.features?.map((feature, idx) => (
+                                    <div key={idx} className="flex items-start gap-3 group/item">
+                                        <div className="mt-1 flex-shrink-0 w-5 h-5 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center group-hover/item:bg-blue-600 group-hover/item:text-white transition-all duration-300">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                        </div>
+                                        <span className="text-slate-600 text-sm sm:text-[15px] font-semibold leading-snug group-hover/item:text-slate-900 transition-colors">{feature}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 <button
