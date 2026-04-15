@@ -37,7 +37,7 @@ export default function TermsAndConditions({ onProceed, onBack, isLoading = fals
                 >
                     <div className="space-y-6 pr-2">
                         <section>
-                            <h3 className="font-bold text-slate-900 mb-2 uppercase text-xs tracking-widest border-b border-slate-200 pb-1">1. Payment Policy (Strict – No Exceptions)</h3>
+                            <h3 className="font-bold text-slate-900 mb-2 uppercase text-xs tracking-widest border-b border-slate-200 pb-1">1. Payment Policy (Strict - No Exceptions)</h3>
                             <ul className="list-disc pl-4 space-y-1">
                                 <li>Full payment is compulsory in advance for all Gym, Zumba, and Yoga memberships.</li>
                                 <li>Once payment is completed: <strong>No refund, No transfer, No reversal</strong> is allowed under any circumstances.</li>

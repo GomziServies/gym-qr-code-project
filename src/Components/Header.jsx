@@ -14,7 +14,7 @@ const Header = () => {
     <>
       {/* Optional Top Info Bar */}
       <div className={`transition-all duration-300 overflow-hidden bg-orange-500 text-white font-body text-xs font-semibold flex items-center justify-between px-6 sm:px-10 ${scrolled ? "h-0 opacity-0 py-0" : "h-10 opacity-100 py-2"}`}>
-        <span className="truncate">📍 123 Fitness Street, Gym City, India &nbsp;|&nbsp; Mon–Sat: 6AM–10PM</span>
+        <span className="truncate">📍 123 Fitness Street, Gym City, India &nbsp;|&nbsp; Mon-Sat: 6AM-10PM</span>
         <div className="hidden sm:flex gap-4">
           <a href="#" className="hover:text-white text-white/80 transition-colors">📞 +91 98765 43210</a>
           <a href="#" className="hover:text-white text-white/80 transition-colors">✉ info@gomzigym.com</a>
