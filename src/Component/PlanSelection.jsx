@@ -248,12 +248,12 @@ export default function PlanSelection({
             {
               id: "69de2a872c33128dc42cae2d",
               title: "3 Months",
-              price: "₹29,000",
+              price: "₹23,000",
             },
             {
               id: "69de2a682c33128dc42cae17",
               title: "6 Months",
-              price: "₹52,000",
+              price: "₹42,000",
             },
             {
               id: "69de29c52c33128dc42cadda",
@@ -474,12 +474,12 @@ export default function PlanSelection({
             {
               id: "69de2896cbb25e5981236b38",
               title: "3 Months",
-              price: "₹29,000",
+              price: "₹23,000",
             },
             {
               id: "69de28accbb25e5981236b3a",
               title: "6 Months",
-              price: "₹52,000",
+              price: "₹42,000",
             },
             {
               id: "69de28c2cbb25e5981236b3d",
