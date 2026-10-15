@@ -248,17 +248,17 @@ export default function PlanSelection({
             {
               id: "69de2a872c33128dc42cae2d",
               title: "3 Months",
-              price: "₹23,000",
+              price: "₹36,000",
             },
             {
               id: "69de2a682c33128dc42cae17",
               title: "6 Months",
-              price: "₹42,000",
+              price: "₹54,000",
             },
             {
               id: "69de29c52c33128dc42cadda",
               title: "12 Months (Best Value)",
-              price: "₹61,000",
+              price: "₹72,000",
             },
           ],
         },
@@ -467,24 +467,24 @@ export default function PlanSelection({
           // ]
           rtp: [
             {
-              id: "69de286bcbb25e5981236b36",
+              id: "69de2a9b2c33128dc42cae2f",
               title: "1 Month",
               price: "₹9,000",
             },
             {
-              id: "69de2896cbb25e5981236b38",
+              id: "69de2a872c33128dc42cae2d",
               title: "3 Months",
-              price: "₹23,000",
+              price: "₹36,000",
             },
             {
-              id: "69de28accbb25e5981236b3a",
+              id: "69de2a682c33128dc42cae17",
               title: "6 Months",
-              price: "₹42,000",
+              price: "₹54,000",
             },
             {
-              id: "69de28c2cbb25e5981236b3d",
+              id: "69de29c52c33128dc42cadda",
               title: "12 Months (Best Value)",
-              price: "₹61,000",
+              price: "₹72,000",
             },
           ],
         },
